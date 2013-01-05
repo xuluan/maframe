@@ -12,9 +12,8 @@ class App.Main extends Spine.Controller
     super
     Node.bind("refresh", @addAll)
     Node.fetch()
-    @addFilter()
     @
 
 
   addAll: (items = []) =>
-    window.console(items)
+    console.log(items)
