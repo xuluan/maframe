@@ -1,15 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div id="app">
+  <div id="main">
+    <div id="nodes">
+    </div>
+    <div class="job">
+    </div>  	
+  </div>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
+</div>
 
-<p>
-  <b>Path:</b>
-  <%= @project.path %>
-</p>
+<div id="footer">
+</div>
 
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<script type="text/javascript">
+window.cur_project =   "<%= @project.name %>";
+jQuery(function(){
+  new App({el: $('#app')});
+});
+</script>
