@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  tree: MyString
+  path: MyString
+  type: 
+  prj: MyString
+
+two:
+  name: MyString
+  tree: MyString
+  path: MyString
+  type: 
+  prj: MyString

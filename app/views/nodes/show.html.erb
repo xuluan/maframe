@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @node.name %>
+</p>
+
+<p>
+  <b>Tree:</b>
+  <%= @node.tree %>
+</p>
+
+<p>
+  <b>Path:</b>
+  <%= @node.path %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @node.type %>
+</p>
+
+<p>
+  <b>Prj:</b>
+  <%= @node.prj %>
+</p>
+
+
+<%= link_to 'Edit', edit_node_path(@node) %> |
+<%= link_to 'Back', nodes_path %>
