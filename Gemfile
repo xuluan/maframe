@@ -18,9 +18,14 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem  'bootstrap-sass'
+
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'spine-rails'
+gem 'eco'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -29,10 +34,22 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
+
+gem 'therubyracer'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+group :development, :test do
+  # gem 'rspec-rails'
+  # gem 'factory_girl_rails'
+  # gem "webrat"  
+
+  # gem 'pry-rails'
+  # gem 'pry-nav'  
+  gem 'thin'  
+end
