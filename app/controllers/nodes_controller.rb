@@ -2,7 +2,8 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def index
-    @nodes = Node.all
+
+    @nodes = Node.from_prj( Project.find_by_name(params[:prj]))
 
     respond_to do |format|
       format.html # index.html.erb

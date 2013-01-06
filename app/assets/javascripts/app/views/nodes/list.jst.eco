@@ -1,0 +1,10 @@
+<ul>
+<% for node in @tree: %>
+<li>
+    <%= node.name %>
+    <% node.list = @list %>
+    <%- @list(node) %>
+ </li>
+<% end %>
+</ul>
+
