@@ -1,2 +1,22 @@
 
-<%- @list(@) %>
+<div class="node-<%=@type%>">
+<div class="btn-group">
+  <button class="btn"> <a class="icon-plus-sign"></a> <%= @name %></button>
+  <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">aaa</a></li>
+    <li><a href="#">bbb</a></li>
+  </ul>
+</div>
+
+<ul class="node-list">
+</ul>
+
+</div>
+    
+
+
+
+

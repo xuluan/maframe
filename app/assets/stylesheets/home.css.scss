@@ -31,3 +31,13 @@
   @extend .container;
   margin: 20px auto;
 }
+
+#main ul
+{
+  list-style-type: none;
+}
+
+a.icon-plus-sign {
+  position: relative;
+  left: -32px;
+}

@@ -11,9 +11,3 @@ class App.Node extends Spine.Model
 
     @ajax().fetch(params)
 
-  @change (record, type, options = {}) ->
-    return if options.ajax is false
-    record.ajax()[type](options.ajax, options)    
-
-  list: (tree) ->
-    JST["app/views/nodes/list"](tree)

@@ -1,10 +1,18 @@
 $ = jQuery.sub()
 Node = App.Node
 
+$.fn.nodeList = ->
+  $(@).parent().parent().siblings("ul.node-list").first()
+
 class NodeItem extends Spine.Controller
   # Delegate the click event to a local handler
-
+  tag: 'li'
   className: 'node'
+  elements:
+    ".node-list": "list"
+
+  events:
+    'click a.icon-plus-sign': 'click'
 
   # Bind events to the record
   constructor: ->
@@ -14,12 +22,23 @@ class NodeItem extends Spine.Controller
   render: (item) =>
     @item = item if item
     @html(@template(@item))
+    @showTree(@item.tree)
     @
 
   # Use a template, in this case via Eco
   template: (item) ->
     @view('nodes/show')(item)
 
+  showTree: (tree) =>
+    for elem in tree
+      node = Node.create(elem)
+      nodeitem = new NodeItem(item: node)
+      @list.append(nodeitem.render().el) 
+
+  click: (e)  =>
+    $(e.target).nodeList().toggle()
+    false
+    
 
 class App.Main extends Spine.Controller
 
