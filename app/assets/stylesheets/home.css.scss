@@ -29,15 +29,33 @@
 
 .fm-container {
   @extend .container;
-  margin: 20px auto;
+  margin: 20px 20px;
 }
 
-#main ul
-{
-  list-style-type: none;
-}
 
-a.icon-plus-sign {
-  position: relative;
-  left: -32px;
+#nodes {
+  @extend .span3;
+  @extend .alert;
+  @extend .alert-info;
+
+
+  ul
+  {
+    list-style-type: none;
+  }
+
+  li
+  {
+    margin: 10px 10px;
+  }
+
+  a.node-fold {
+    position: relative;
+    left: -36px;
+  }
+
+  a.node-file {
+    position: relative;
+    left: -36px;
+  }
 }

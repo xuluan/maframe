@@ -12,7 +12,7 @@ class NodeItem extends Spine.Controller
     ".node-list": "list"
 
   events:
-    'click a.icon-plus-sign': 'click'
+    'click a.node-fold': 'click'
 
   # Bind events to the record
   constructor: ->
@@ -37,6 +37,7 @@ class NodeItem extends Spine.Controller
 
   click: (e)  =>
     $(e.target).nodeList().toggle()
+    $(e.target).toggleClass("icon-plus-sign icon-minus-sign")
     false
     
 

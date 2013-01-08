@@ -1,13 +1,27 @@
 
 <div class="node-<%=@type%>">
 <div class="btn-group">
-  <button class="btn"> <a class="icon-plus-sign"></a> <%= @name %></button>
+  <button class="btn"> 
+    <% if @type == "dir": %>
+      <a class="node-fold icon-plus-sign"></a> 
+    <% else: %>
+      <a class="node-file icon-list-alt"></a> 
+    <% end %>  
+  <a class="node-<%=@type%>"></a> 
+  <%= @name %></button>
   <button class="btn dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
-    <li><a href="#">aaa</a></li>
-    <li><a href="#">bbb</a></li>
+    <% if @type == "dir": %>
+      <li><a class="create-job">Create Job</a></li>
+      <li><a class="add-fold">Add Fold</a></li>
+      <li><a class="remove">Remove</a></li>
+    <% else: %>
+      <li><a class="remove">Remove</a></li>
+      <li><a class="eidt">Edit</a></li>
+    <% end %>    
+
   </ul>
 </div>
 
