@@ -1,9 +1,6 @@
 $ = jQuery.sub()
 Node = App.Node
 
-$.fn.nodeList = ->
-  $(@).parent().parent().siblings("ul.node-list").first()
-
 class NodeItem extends Spine.Controller
   # Delegate the click event to a local handler
   tag: 'li'
@@ -38,7 +35,7 @@ class NodeItem extends Spine.Controller
       @list.append(nodeitem.render().el) 
 
   click: (e)  =>
-    $(e.target).nodeList().toggle()
+    @$("ul.node-list").first().toggle()
     $(e.target).toggleClass("icon-plus-sign icon-minus-sign")
     false
     
@@ -50,12 +47,14 @@ class NodeItem extends Spine.Controller
   
   addFold: (e) =>
     name = prompt("Please enter new fold name:")
+    console.log("a")
     if name
+      console.log(name)
       item = {name: name, path: @item.path+"/"+name, type: "dir", tree: []}
       node = Node.create(item)
       nodeitem = new NodeItem(item: node)
       @list.append(nodeitem.render().el)
-    $(e.target).parent().parent().dropdown('toggle')
+    @$('.dropdown-toggle').first().dropdown('toggle')
     false
 
 
