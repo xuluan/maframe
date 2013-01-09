@@ -3,7 +3,7 @@
 <div class="btn-group">
   <button class="btn"> 
     <% if @type == "dir": %>
-      <a class="node-fold icon-plus-sign"></a> 
+      <a class="node-fold icon-minus-sign"></a> 
     <% else: %>
       <a class="node-file icon-list-alt"></a> 
     <% end %>  

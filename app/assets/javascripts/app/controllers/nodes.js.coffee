@@ -13,6 +13,8 @@ class NodeItem extends Spine.Controller
 
   events:
     'click a.node-fold': 'click'
+    'click a.remove': 'remove'
+    'click a.add-fold': 'addFold'
 
   # Bind events to the record
   constructor: ->
@@ -40,6 +42,22 @@ class NodeItem extends Spine.Controller
     $(e.target).toggleClass("icon-plus-sign icon-minus-sign")
     false
     
+  remove: (e) ->
+    if confirm('Delete it, sure?')
+      @item.destroy()
+      @el.remove()
+    false
+  
+  addFold: (e) =>
+    name = prompt("Please enter new fold name:")
+    if name
+      item = {name: name, path: @item.path+"/"+name, type: "dir", tree: []}
+      node = Node.create(item)
+      nodeitem = new NodeItem(item: node)
+      @list.append(nodeitem.render().el)
+    $(e.target).parent().parent().dropdown('toggle')
+    false
+
 
 class App.Main extends Spine.Controller
 
