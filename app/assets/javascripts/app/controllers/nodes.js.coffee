@@ -43,6 +43,7 @@ class NodeItem extends Spine.Controller
     if confirm('Delete it, sure?')
       @item.destroy()
       @el.remove()
+      Node.fetch(cmd: "rm", path: @item.path)
     false
   
   addFold: (e) =>
@@ -54,6 +55,7 @@ class NodeItem extends Spine.Controller
       node = Node.create(item)
       nodeitem = new NodeItem(item: node)
       @list.append(nodeitem.render().el)
+      Node.fetch(cmd: "mkdir", path: node.path)
     @$('.dropdown-toggle').first().dropdown('toggle')
     false
 

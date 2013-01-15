@@ -2,8 +2,17 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def index
-
-    @nodes = Node.from_prj( Project.find_by_name(params[:prj]))
+    cmd = params[:cmd]
+    prj = Project.find_by_name(params[:prj])
+    @nodes = {}
+    case cmd
+    when "rm"
+      Node.rm(params[:path], prj)
+    when "mkdir"
+      Node.mkdir(params[:path], prj)
+    when nil
+      @nodes = Node.from_prj(prj)
+    end
 
     respond_to do |format|
       format.html # index.html.erb

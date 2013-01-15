@@ -21,4 +21,13 @@ class Node < ActiveRecord::Base
     [root]
   end
 
+  def Node.rm(path, prj)
+    #TODO check path is valid!!!
+    system("rm -rf #{path}")
+  end
+
+  def Node.mkdir(path, prj)
+    #TODO check path is valid!!!
+    system("mkdir -p #{path}")
+  end
 end
