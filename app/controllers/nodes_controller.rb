@@ -10,6 +10,11 @@ class NodesController < ApplicationController
       Node.rm(params[:path], prj)
     when "mkdir"
       Node.mkdir(params[:path], prj)
+    when "create"
+      @nodes = params[:job]
+      File.open(params[:path], "w+") do |file|
+        file.puts @nodes.to_json
+      end
     when nil
       @nodes = Node.from_prj(prj)
     end

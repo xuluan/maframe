@@ -12,6 +12,8 @@ class NodeItem extends Spine.Controller
     'click a.node-fold': 'click'
     'click a.remove': 'remove'
     'click a.add-fold': 'addFold'
+    'click a.create-job': 'createJob'
+
 
   # Bind events to the record
   constructor: ->
@@ -21,7 +23,8 @@ class NodeItem extends Spine.Controller
   render: (item) =>
     @item = item if item
     @html(@template(@item))
-    @showTree(@item.tree)
+    if @item.tree 
+      @showTree(@item.tree)
     @
 
   # Use a template, in this case via Eco
@@ -48,9 +51,7 @@ class NodeItem extends Spine.Controller
   
   addFold: (e) =>
     name = prompt("Please enter new fold name:")
-    console.log("a")
     if name
-      console.log(name)
       item = {name: name, path: @item.path+"/"+name, type: "dir", tree: []}
       node = Node.create(item)
       nodeitem = new NodeItem(item: node)
@@ -59,12 +60,23 @@ class NodeItem extends Spine.Controller
     @$('.dropdown-toggle').first().dropdown('toggle')
     false
 
+  createJob: (e) =>
+    name = prompt("Please enter new job name:")
+    if name
+      item = {name: name, path: @item.path+"/"+name, type: "file", template: "none"}
+      node = Node.create(item)
+      nodeitem = new NodeItem(item: node)
+      @list.append(nodeitem.render().el)
+      Node.fetch(cmd: "create", path: node.path, job: item)
+    @$('.dropdown-toggle').first().dropdown('toggle')
+    false
 
 class App.Main extends Spine.Controller
 
   el: "#main"
   elements:
     "#nodes": "nodes"
+    "#job": "job"
 
   constructor: ->
     super
@@ -76,6 +88,12 @@ class App.Main extends Spine.Controller
     node = new NodeItem(item: item)
     @nodes.append(node.render().el)
 
+  editJob: (item) =>
+    console.log(item.path)
+
   addAll: (items = []) =>
     for item in items
-      @addOne(item)
+      @addOne(item) if item.type is "dir"
+      @editJob(item) if item.type is "file"
+
+
