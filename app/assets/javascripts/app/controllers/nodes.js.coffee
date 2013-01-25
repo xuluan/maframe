@@ -1,5 +1,6 @@
 $ = jQuery.sub()
 Node = App.Node
+Jobs = App.Jobs
 
 class NodeItem extends Spine.Controller
   # Delegate the click event to a local handler
@@ -68,18 +69,22 @@ class NodeItem extends Spine.Controller
       nodeitem = new NodeItem(item: node)
       @list.append(nodeitem.render().el)
       Node.fetch(cmd: "create", path: node.path, job: item)
+      @navigate('/jobs', node.id, 'edit')
+
     @$('.dropdown-toggle').first().dropdown('toggle')
     false
 
-class App.Main extends Spine.Controller
-
-  el: "#main"
+class Sidebar extends Spine.Controller
+  className: 'sidebar'
+  
   elements:
     "#nodes": "nodes"
-    "#job": "job"
 
   constructor: ->
     super
+    root = $('<ul id="nodes" />')
+    @append root
+
     Node.bind("refresh", @addAll)
     Node.fetch()
     @
@@ -96,4 +101,23 @@ class App.Main extends Spine.Controller
       @addOne(item) if item.type is "dir"
       @editJob(item) if item.type is "file"
 
+class App.Main extends Spine.Controller
 
+  el: "#main"
+  
+  constructor: ->
+    super
+    
+    @sidebar = new Sidebar
+    @job     = new Jobs
+    
+    @routes
+      '/jobs/:id/edit': (params) -> 
+        console.log("edit trigger")
+        console.log(params)
+        @job.edit.active(params)
+      '/jobs/:id': (params) ->
+        console.log("show trigger")
+        @job.show.active(params)
+   
+    @append @sidebar, @job
