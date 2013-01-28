@@ -15,6 +15,8 @@ class NodesController < ApplicationController
       File.open(params[:path], "w+") do |file|
         file.puts @nodes.to_json
       end
+    when "fetch"
+      @nodes = JSON.parse(IO.read(params[:path]))
     when nil
       @nodes = Node.from_prj(prj)
     end

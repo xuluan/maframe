@@ -14,6 +14,7 @@ class NodeItem extends Spine.Controller
     'click a.remove': 'remove'
     'click a.add-fold': 'addFold'
     'click a.create-job': 'createJob'
+    'click a.edit': 'edit'
 
 
   # Bind events to the record
@@ -62,6 +63,7 @@ class NodeItem extends Spine.Controller
     false
 
   createJob: (e) =>
+    @navigate('/sidebar')
     name = prompt("Please enter new job name:")
     if name
       item = {name: name, path: @item.path+"/"+name, type: "file", template: "none"}
@@ -69,8 +71,12 @@ class NodeItem extends Spine.Controller
       nodeitem = new NodeItem(item: node)
       @list.append(nodeitem.render().el)
       Node.fetch(cmd: "create", path: node.path, job: item)
-      @navigate('/jobs', node.id, 'edit')
+    @$('.dropdown-toggle').first().dropdown('toggle')
+    false
 
+  edit: (e) =>
+    @navigate('/sidebar')
+    Node.fetch(cmd: "fetch", path: @item.path)
     @$('.dropdown-toggle').first().dropdown('toggle')
     false
 
@@ -93,13 +99,13 @@ class Sidebar extends Spine.Controller
     node = new NodeItem(item: item)
     @nodes.append(node.render().el)
 
-  editJob: (item) =>
-    console.log(item.path)
+  gotJob: (item) =>
+    @navigate('/jobs/create', item)
 
   addAll: (items = []) =>
     for item in items
       @addOne(item) if item.type is "dir"
-      @editJob(item) if item.type is "file"
+      @gotJob(item) if item.type is "file"
 
 class App.Main extends Spine.Controller
 
@@ -112,12 +118,12 @@ class App.Main extends Spine.Controller
     @job     = new Jobs
     
     @routes
-      '/jobs/:id/edit': (params) -> 
-        console.log("edit trigger")
-        console.log(params)
+      '/jobs/create': (params) -> 
+        @job.create.active(params)    
+      '/jobs/edit': (params) -> 
         @job.edit.active(params)
       '/jobs/:id': (params) ->
-        console.log("show trigger")
         @job.show.active(params)
+
    
     @append @sidebar, @job

@@ -1,0 +1,4 @@
+
+<div>
+choice Job Type for job"<%= @name %>"
+</div>

@@ -6,12 +6,10 @@ class Show extends Spine.Controller
   className: 'show'
   
   constructor: ->
-    console.log("show init")
     super
-    @active @change
+    @active @change if @item
 
   render: ->
-    console.log("show render")
     @html(@template(@item))
 
   template: (item) ->
@@ -24,20 +22,37 @@ class Edit extends Spine.Controller
   className: 'edit'
   
   constructor: ->
-    console.log("edit init")
     super
-    @active @change
+    @active @change 
 
   render: ->
-    console.log("edit render")
     @html(@template(@item))
 
   template: (item) ->
     @view('jobs/edit')(item)
 
   change: (params) =>
-    @item = {}
+    @item = params
     @render()
+
+class Create extends Spine.Controller
+  className: 'create'
+  
+  constructor: ->
+    super
+    @active @change 
+
+  render: ->
+    @html(@template(@item))
+
+  template: (item) ->
+    @view('jobs/create')(item)
+
+  change: (params) =>
+    # @navigate('/jobs/edit', params)
+    @item = params
+    @render()
+
 
 class App.Jobs extends Spine.Stack
   className: 'job stack'
@@ -45,6 +60,7 @@ class App.Jobs extends Spine.Stack
   controllers:
     show: Show
     edit: Edit
+    create: Create
 
 
     

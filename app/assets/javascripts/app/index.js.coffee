@@ -21,6 +21,6 @@ class App extends Spine.Controller
     #  ...
     window.console.log("app")
     @append(@main = new App.Main)
-    Spine.Route.setup()    
+    Spine.Route.setup(shim:true)    
 
 window.App = App

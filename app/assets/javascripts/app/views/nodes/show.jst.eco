@@ -19,7 +19,7 @@
       <li><a class="remove">Remove</a></li>
     <% else: %>
       <li><a class="remove">Remove</a></li>
-      <li><a class="eidt">Edit</a></li>
+      <li><a class="edit">Edit</a></li>
     <% end %>    
 
   </ul>

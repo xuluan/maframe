@@ -32,12 +32,16 @@
   margin: 20px 20px;
 }
 
+div#main {
+  @extend .row;
+  @extend .clearfix;
+}
 
-#nodes {
-  @extend .span3;
+.sidebar {
+  @extend .span4;
   @extend .alert;
   @extend .alert-info;
-
+  float: left;
 
   ul
   {
@@ -58,4 +62,13 @@
     position: relative;
     left: -36px;
   }
+}
+
+.stack > *:not(.active) {
+    display: none;
+  }
+
+.job {
+  @extend .span6;
+  float: right;
 }
