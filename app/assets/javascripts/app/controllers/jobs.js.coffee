@@ -1,7 +1,11 @@
 $ = jQuery.sub()
 Jobs = App.Jobs
+JobSegyin= App.JobSegyin
 
-
+$.fn.templateName = ->
+  template  = $(@).data('template')
+  template or= $(@).parents('[data-template]').data('template')
+  
 class Show extends Spine.Controller
   className: 'show'
   
@@ -20,7 +24,10 @@ class Show extends Spine.Controller
 
 class Edit extends Spine.Controller
   className: 'edit'
-  
+  factory:
+    "Segyin": (item) ->
+      JobSegyin.create(item)
+      
   constructor: ->
     super
     @active @change 
@@ -32,12 +39,14 @@ class Edit extends Spine.Controller
     @view('jobs/edit')(item)
 
   change: (params) =>
-    @item = params
+    @item = @factory[params.template](params)
     @render()
 
 class Create extends Spine.Controller
   className: 'create'
-  
+  events:
+    'click a.template': 'selTemplate'
+
   constructor: ->
     super
     @active @change 
@@ -49,10 +58,15 @@ class Create extends Spine.Controller
     @view('jobs/create')(item)
 
   change: (params) =>
-    # @navigate('/jobs/edit', params)
-    @item = params
-    @render()
-
+    if params.template is "none"
+      @item = params
+      @render()
+    else 
+      @navigate('/jobs/edit', params)
+ 
+  selTemplate: (e) =>
+    @item.template = $(e.target).templateName()
+    @navigate('/jobs/edit', @item)
 
 class App.Jobs extends Spine.Stack
   className: 'job stack'

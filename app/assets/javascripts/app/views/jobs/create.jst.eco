@@ -1,4 +1,10 @@
-
-<div>
-choice Job Type for job"<%= @name %>"
-</div>
+<p>
+Edit Job: <%= @name %>
+</p>
+<p>
+please select job type:
+</p>
+<ul >
+  <li><a class="template" data-template="Segyin">Segyin</a></li>
+  <li><a class="template"  data-template="NMO">NMO</a></li>
+</ul>
