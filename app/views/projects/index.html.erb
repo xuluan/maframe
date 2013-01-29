@@ -1,6 +1,7 @@
 <h1>Listing projects</h1>
 
-<table>
+
+<table class="table table-striped">
   <tr>
     <th>Name</th>
     <th>Path</th>
@@ -14,7 +15,6 @@
     <td><%= project.name %></td>
     <td><%= project.path %></td>
     <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
