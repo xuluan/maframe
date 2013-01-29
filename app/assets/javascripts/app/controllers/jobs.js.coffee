@@ -36,7 +36,8 @@ class Edit extends Spine.Controller
   events:
     'submit form': 'save'
     'reset form': 'cancel'
-      
+    'click a.help': 'help'
+
   constructor: ->
     super
     @active @change 
@@ -53,15 +54,23 @@ class Edit extends Spine.Controller
 
   save: (e) =>
     e.preventDefault()
-    @item.fromForm(e.target).save()
-    Node.fetch(cmd: "update", path: @item.path, job: @item.toJSON())
-    @close()
+    @item.fromForm(e.target)
+    error = @item.validate()
+    if error
+      alert(error)
+    else
+      @item.save()
+      Node.fetch(cmd: "update", path: @item.path, job: @item.toJSON())
+      @close()
 
   cancel: =>
     @close()
 
   close: =>
     @navigate('/jobs', @item.template, @item.cid)
+    
+  help: =>
+    @$("div.help").toggle()
 
 
 class Create extends Spine.Controller

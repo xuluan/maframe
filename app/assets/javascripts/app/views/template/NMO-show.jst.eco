@@ -1,7 +1,8 @@
 
-<div>
-NMO <%= @name %> 
+<div> 
+  <p class="lead">NMO Job: <%= @name %>   </p>
 </div>
+
 
 <table class="table table-striped">
   <tr>

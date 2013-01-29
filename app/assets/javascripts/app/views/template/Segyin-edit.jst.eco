@@ -1,6 +1,6 @@
 
-<div>
-Segyin <%= @name %> 
+<div> 
+  <p class="lead">Segyin Job: <%= @name %>   </p>
 </div>
 
 <form class="form-horizontal">
@@ -37,7 +37,25 @@ Segyin <%= @name %>
       <button type="reset" class="cancel">Cancel</button>
   </div>
 </form>
+<a class="help"> HELP </a>
 
 <div class="help">
-This is help information.
+Segyin Job convert segyin file to rsf format.
+<br/>
+
+Meanwhile trace header and header file will be generated.
+<br/>
+
+A file location has 3 parts: host name, path and file name;
+<br/>
+
+For example:  host_a:/prj/out.rsf
+<br/>
+
+<strong>host_a </strong>is the host name;
+<br/>
+<strong>/prj/</strong> is the path;
+<br/>
+<strong>out.rsf</strong> is the file name;
+
 </div>

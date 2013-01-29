@@ -1,7 +1,8 @@
 
-<div>
-Segyin <%= @name %> Information:
+<div> 
+  <p class="lead">Segyin Job: <%= @name %>   </p>
 </div>
+
 
 <table class="table table-striped">
   <tr>

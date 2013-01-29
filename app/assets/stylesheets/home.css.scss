@@ -71,4 +71,7 @@ div#main {
 .job {
   @extend .span6;
   float: right;
+  div.help {
+    display: none;
+  }
 }
