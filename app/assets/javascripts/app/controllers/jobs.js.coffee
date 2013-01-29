@@ -1,6 +1,7 @@
 $ = jQuery.sub()
 Jobs = App.Jobs
-JobSegyin= App.JobSegyin
+JobSegyin = App.JobSegyin
+JobNMO = App.JobNMO
 
 $.fn.templateName = ->
   template  = $(@).data('template')
@@ -27,6 +28,8 @@ class Edit extends Spine.Controller
   factory:
     "Segyin": (item) ->
       JobSegyin.create(item)
+    "NMO": (item) ->
+      JobNMO.create(item)
       
   constructor: ->
     super
@@ -36,7 +39,7 @@ class Edit extends Spine.Controller
     @html(@template(@item))
 
   template: (item) ->
-    @view('jobs/edit')(item)
+    @view('template/'+ item.template)(item)
 
   change: (params) =>
     @item = @factory[params.template](params)
