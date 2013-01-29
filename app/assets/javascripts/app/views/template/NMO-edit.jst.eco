@@ -1,0 +1,38 @@
+
+<div>
+NMO <%= @name %> 
+</div>
+
+
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="in_file">Input File</label>
+    <div class="controls">
+      <input type="text" name="in_file" value="<%= @in_file %>" required autofocus>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="out_file">Output File</label>
+    <div class="controls">
+      <input type="text" name="out_file" value="<%= @out_file %>" required>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="velocity">Velocity</label>
+    <div class="controls">
+      <input type="text" name="velocity" value="<%= @velocity %>" required>
+    </div>
+  </div>
+
+
+  <div class="control-group">
+      <button type="submit" class="save">Save</button>
+      <button class="cancel">Cancel</button>
+  </div>
+</form>
+
+<div class="help">
+This is help information.
+</div>

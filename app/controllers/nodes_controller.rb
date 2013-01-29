@@ -15,6 +15,11 @@ class NodesController < ApplicationController
       File.open(params[:path], "w+") do |file|
         file.puts @nodes.to_json
       end
+    when "update"
+      File.open(params[:path], "w+") do |file|
+        params[:job].delete(:id)
+        file.puts params[:job].to_json
+      end      
     when "fetch"
       @nodes = JSON.parse(IO.read(params[:path]))
     when nil

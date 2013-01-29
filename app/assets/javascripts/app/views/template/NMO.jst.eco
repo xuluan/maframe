@@ -1,4 +1,0 @@
-
-<div>
-NMO <%= @name %> 
-</div>

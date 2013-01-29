@@ -90,7 +90,6 @@ class Sidebar extends Spine.Controller
     super
     root = $('<ul id="nodes" />')
     @append root
-
     Node.bind("refresh", @addAll)
     Node.fetch()
     @
@@ -119,10 +118,13 @@ class App.Main extends Spine.Controller
     
     @routes
       '/jobs/create': (params) -> 
-        @job.create.active(params)    
+        if params.template isnt 'none'
+          @job.edit.active(params)
+        else
+          @job.create.active(params)    
       '/jobs/edit': (params) -> 
         @job.edit.active(params)
-      '/jobs/:id': (params) ->
+      '/jobs/:template/:id': (params) ->
         @job.show.active(params)
 
    

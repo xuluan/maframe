@@ -1,35 +1,41 @@
 $ = jQuery.sub()
 Jobs = App.Jobs
+Node = App.Node
+
 JobSegyin = App.JobSegyin
 JobNMO = App.JobNMO
 
 $.fn.templateName = ->
   template  = $(@).data('template')
   template or= $(@).parents('[data-template]').data('template')
-  
+
+Factory =
+  "Segyin": JobSegyin
+  "NMO": JobNMO
+
 class Show extends Spine.Controller
   className: 'show'
   
   constructor: ->
     super
-    @active @change if @item
+    @active @change
 
   render: ->
     @html(@template(@item))
 
   template: (item) ->
-    @view('jobs/show')(item)
+    @view("template/#{item.template}-show")(item)
 
   change: (params) =>
+    @item = Factory[params.template].find(params.id)
     @render()
 
 class Edit extends Spine.Controller
   className: 'edit'
-  factory:
-    "Segyin": (item) ->
-      JobSegyin.create(item)
-    "NMO": (item) ->
-      JobNMO.create(item)
+
+  events:
+    'submit form': 'save'
+    'reset form': 'cancel'
       
   constructor: ->
     super
@@ -39,11 +45,24 @@ class Edit extends Spine.Controller
     @html(@template(@item))
 
   template: (item) ->
-    @view('template/'+ item.template)(item)
+    @view("template/#{item.template}-edit")(item)
 
   change: (params) =>
-    @item = @factory[params.template](params)
+    @item = Factory[params.template].create(params)
     @render()
+
+  save: (e) =>
+    e.preventDefault()
+    @item.fromForm(e.target).save()
+    Node.fetch(cmd: "update", path: @item.path, job: @item.toJSON())
+    @close()
+
+  cancel: =>
+    @close()
+
+  close: =>
+    @navigate('/jobs', @item.template, @item.cid)
+
 
 class Create extends Spine.Controller
   className: 'create'
@@ -61,11 +80,8 @@ class Create extends Spine.Controller
     @view('jobs/create')(item)
 
   change: (params) =>
-    if params.template is "none"
-      @item = params
-      @render()
-    else 
-      @navigate('/jobs/edit', params)
+    @item = params
+    @render()
  
   selTemplate: (e) =>
     @item.template = $(e.target).templateName()

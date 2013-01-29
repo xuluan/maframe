@@ -1,0 +1,27 @@
+
+<div>
+Segyin <%= @name %> Information:
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <td>Input File</td>
+    <td><%= @in_file %></td>
+  </tr>
+
+  <tr>
+    <td>Output RSF File</td>
+    <td><%= @rsf_file %></td>
+  </tr>
+
+  <tr>
+    <td>Output Trace File</td>
+    <td><%= @trace_file %></td>
+  </tr>
+
+  <tr>
+    <td>Output Header File</td>
+    <td><%= @header_file %></td>
+  </tr>
+
+</table>

@@ -1,0 +1,22 @@
+
+<div>
+NMO <%= @name %> 
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <td>Input File</td>
+    <td><%= @in_file %></td>
+  </tr>
+
+  <tr>
+    <td>Output File</td>
+    <td><%= @out_file %></td>
+  </tr>
+
+  <tr>
+    <td>Velocity</td>
+    <td><%= @velocity %></td>
+  </tr>
+
+</table>
