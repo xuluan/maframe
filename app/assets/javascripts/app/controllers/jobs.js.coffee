@@ -27,7 +27,10 @@ class Show extends Spine.Controller
     @view("template/#{item.template}-show")(item)
 
   change: (params) =>
-    @item = Factory[params.template].find(params.id)
+    if params.id
+      @item = Factory[params.template].find(params.id)
+    else
+      @item = Factory[params.template].create(params)
     @render()
 
 class Edit extends Spine.Controller

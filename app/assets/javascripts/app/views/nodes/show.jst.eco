@@ -1,7 +1,7 @@
 
 <div class="node-<%=@type%>">
 <div class="btn-group">
-  <button class="btn"> 
+  <button class="btn <%= if @type is 'file' then 'show-job' %>"> 
     <% if @type == "dir": %>
       <a class="node-fold icon-minus-sign"></a> 
     <% else: %>

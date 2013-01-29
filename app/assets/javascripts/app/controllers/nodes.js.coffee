@@ -15,6 +15,7 @@ class NodeItem extends Spine.Controller
     'click a.add-fold': 'addFold'
     'click a.create-job': 'createJob'
     'click a.edit': 'edit'
+    'click button.show-job': 'showJob'
 
 
   # Bind events to the record
@@ -80,6 +81,11 @@ class NodeItem extends Spine.Controller
     @$('.dropdown-toggle').first().dropdown('toggle')
     false
 
+  showJob: (e) => 
+    @navigate('/sidebar')
+    Node.fetch(cmd: "show", path: @item.path)
+    false
+    
 class Sidebar extends Spine.Controller
   className: 'sidebar'
   
@@ -96,15 +102,20 @@ class Sidebar extends Spine.Controller
 
   addOne: (item) =>
     node = new NodeItem(item: item)
-    @nodes.append(node.render().el)
-
-  gotJob: (item) =>
-    @navigate('/jobs/create', item)
+    @nodes.append(node.render().el)    
 
   addAll: (items = []) =>
     for item in items
-      @addOne(item) if item.type is "dir"
-      @gotJob(item) if item.type is "file"
+      switch item.cmd
+        when 'fetch', 'create'
+          @navigate('/jobs/create', item)
+        when 'show', 'update'
+          @navigate('/jobs', item.template, null, item)
+        when 'mkdir', 'rm' 
+          @navigate('/siderbar')
+        else  @addOne(item)
+
+
 
 class App.Main extends Spine.Controller
 

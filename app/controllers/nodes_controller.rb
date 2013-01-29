@@ -16,15 +16,18 @@ class NodesController < ApplicationController
         file.puts @nodes.to_json
       end
     when "update"
+      @nodes = params[:job]
+      @nodes.delete(:id)
       File.open(params[:path], "w+") do |file|
-        params[:job].delete(:id)
-        file.puts params[:job].to_json
+        file.puts @nodes.to_json
       end      
-    when "fetch"
+    when "fetch", "show"
       @nodes = JSON.parse(IO.read(params[:path]))
     when nil
       @nodes = Node.from_prj(prj)
     end
+    
+    @nodes[:cmd] = cmd if cmd
 
     respond_to do |format|
       format.html # index.html.erb
