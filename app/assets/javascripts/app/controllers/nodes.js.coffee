@@ -50,6 +50,7 @@ class NodeItem extends Spine.Controller
       @item.destroy()
       @el.remove()
       Node.fetch(cmd: "rm", path: @item.path)
+    @$('.dropdown-toggle').first().dropdown('toggle')
     false
   
   addFold: (e) =>
