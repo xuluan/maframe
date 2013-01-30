@@ -9,6 +9,10 @@ $.fn.templateName = ->
   template  = $(@).data('template')
   template or= $(@).parents('[data-template]').data('template')
 
+$.fn.helpClass = ->
+  help  = $(@).data('help')
+  help or= $(@).parents('[data-help]').data('help')
+
 Factory =
   "Segyin": JobSegyin
   "NMO": JobNMO
@@ -72,8 +76,11 @@ class Edit extends Spine.Controller
   close: =>
     @navigate('/jobs', @item.template, @item.cid)
     
-  help: =>
-    @$("div.help").toggle()
+  help: (e) =>
+    helpClass = $(e.target).helpClass()
+    helpClass or= "help"
+
+    @$("div.#{helpClass}").toggle()
 
 
 class Create extends Spine.Controller

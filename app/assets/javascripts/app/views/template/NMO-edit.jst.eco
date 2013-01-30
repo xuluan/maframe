@@ -18,6 +18,7 @@
     <div class="controls">
       <input type="text" name="out_file" value="<%= @out_file %>" required>
     </div>
+
   </div>
 
   <div class="control-group">
@@ -25,6 +26,12 @@
     <div class="controls">
       <input type="text" name="velocity" value="<%= @velocity %>" required>
     </div>
+  <a class="help" data-help="help-velocity"> Velocity HELP </a>
+
+  <div class="help help-velocity">
+  Velocity should be [0 - 5000]
+  </div>
+
   </div>
 
 
