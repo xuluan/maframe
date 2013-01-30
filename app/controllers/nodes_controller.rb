@@ -13,13 +13,14 @@ class NodesController < ApplicationController
     when "create"
       @nodes = params[:job]
       File.open(params[:path], "w+") do |file|
-        file.puts @nodes.to_json
+        file.puts JSON.pretty_generate(JSON.parse( @nodes.to_json)) 
       end
+
     when "update"
       @nodes = params[:job]
       @nodes.delete(:id)
       File.open(params[:path], "w+") do |file|
-        file.puts @nodes.to_json
+        file.puts JSON.pretty_generate(JSON.parse( @nodes.to_json)) 
       end      
     when "fetch", "show"
       @nodes = JSON.parse(IO.read(params[:path]))
